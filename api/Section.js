@@ -66,7 +66,7 @@ const Styled = {
     `,
 
     PriceWrap: styled.View`
-        width:70px;
+        width:105px;
         height:100%;
         display:flex;
         justify-content:space-around;
@@ -82,14 +82,14 @@ const Styled = {
         font-size:17px;
         color:#000;
     `,
-    Red:styled.View`
+    Red: styled.View`
         width:300px;
         height:300px;
         background-color:red;
     `,
 }
 const Section = (props) => {
-    const { List, bool, color, touch } = props
+    const { List, search, color, touch } = props
     if (color === 0) {
         //재생목록
         return (
@@ -102,15 +102,15 @@ const Section = (props) => {
         console.log(touch.props)
         return (
             <Styled.Section>
-                {touch.map((v)=>{
-                    return(
+                {touch.map((v) => {
+                    return (
                         <Styled.Red></Styled.Red>
                     )
                 })}
             </Styled.Section>
         )
     } else {
-        if (bool === false) {
+        if (search === false) {
             return (
                 <Styled.Section1>
                     <Styled.Text>검색결과가 없습니다</Styled.Text>
@@ -120,62 +120,32 @@ const Section = (props) => {
             return (
                 <Styled.Section>
                     {List.map((v, index) => {
-                        if (bool === true) {
-                            if (v.title.length >= 22) {
-                                //제목이 너무 길면 폰트사이즈를 줄여줌
-                                return (
-                                    <Styled.Book onPress={console.log(1)}>
-                                        <Styled.Thumbnail source={{ uri: v.thumbnail }} />
-                                        <Styled.Title1>{v.title.substr(0, 24)}</Styled.Title1>
-                                        <Styled.Text>저자: {v.authors}</Styled.Text>
-                                        <Styled.Text>{v.contents.substring(0, 150)}</Styled.Text>
-                                        <Styled.Sub>
-                                            <Styled.PriceWrap>
-                                                <Styled.Price>{v.price}</Styled.Price>
-                                                <Styled.SalePrice>{v.sale_price}원</Styled.SalePrice>
-                                            </Styled.PriceWrap>
-                                            <AddBtn
-                                                touch={touch}
-                                                index={index}
-                                                price={v.sale_price}
-                                                thumbnail={v.thumbnail}
-                                                title={v.title.substr(0, 24)}
-                                                authors={v.authors}
-                                            />
-                                        </Styled.Sub>
-                                    </Styled.Book>
-                                )
-                            } else {
-                                return (
-                                    <Styled.Book onPress={console.log(1)}>
-                                        <Styled.Thumbnail source={{ uri: v.thumbnail }} />
-                                        <Styled.Title>{v.title.substr(0, 21)}</Styled.Title>
-                                        <Styled.Text>저자: {v.authors}</Styled.Text>
-                                        <Styled.Text>{v.contents.substring(0, 150)}</Styled.Text>
-                                        <Styled.Sub>
-                                            <Styled.PriceWrap>
-                                                <Styled.Price>{v.price}</Styled.Price>
-                                                <Styled.SalePrice>{v.sale_price}원</Styled.SalePrice>
-                                            </Styled.PriceWrap>
-                                            <AddBtn
-                                                touch={touch}
-                                                index={index}
-                                                price={v.sale_price}
-                                                thumbnail={v.thumbnail}
-                                                title={v.title.substr(0, 21)}
-                                                authors={v.authors}
-                                            />
-                                        </Styled.Sub>
-                                    </Styled.Book>
-                                )
-                            }
-                        }
+                        return (
+                            <Styled.Book>
+                                <Styled.Thumbnail source={{ uri: v.thumbnail }} />
+                                <Styled.Title1>{v.title.substr(0, 24)}</Styled.Title1>
+                                <Styled.Text>저자: {v.authors}</Styled.Text>
+                                <Styled.Text>{v.contents.substring(0, 150)}</Styled.Text>
+                                <Styled.Sub>
+                                    <Styled.PriceWrap>
+                                        <Styled.Price>{v.price}</Styled.Price>
+                                        <Styled.SalePrice>{v.sale_price === -1 ? "품절상품입니다":v.sale_price+"원"}</Styled.SalePrice>
+                                    </Styled.PriceWrap>
+                                    <AddBtn
+                                        touch={touch}
+                                        index={index}
+                                        price={v.sale_price}
+                                        thumbnail={v.thumbnail}
+                                        title={v.title.substr(0, 24)}
+                                        authors={v.authors}
+                                    />
+                                </Styled.Sub>
+                            </Styled.Book>
+                        )
                     })}
                 </Styled.Section>
             )
         }
     }
-
-
 }
 export { Section }

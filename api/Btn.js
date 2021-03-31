@@ -3,13 +3,14 @@ import styled from "styled-components"
 
 
 const Btn = (props) => {
-    const { link, name, index, color, setColor } = props
+    const { link, name, index, color, setColor, touch } = props
     const Setting =()=>{
         if(color === index){
             setColor("")
         }else{
             setColor(index)
             console.log(color)
+            console.log(touch)
         }
     }
     const Styled = {
