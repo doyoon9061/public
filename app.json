@@ -1,0 +1,12 @@
+{
+  "name": "myapi",
+  "displayName": "myapi",
+  "expo": {
+    "name": "myapi",
+    "slug": "myapi",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
