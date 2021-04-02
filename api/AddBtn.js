@@ -20,7 +20,6 @@ const AddBtn = (props) => {
     const {touch, index, price, thumbnail, title, authors} = props;
     const [press, setPress] = useState(false)
     const Add=()=>{
-        // console.log(index)
         touch.splice(0, 0, {
                                 index:index, 
                                 price:price, 
